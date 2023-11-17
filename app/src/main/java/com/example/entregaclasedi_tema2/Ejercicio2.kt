@@ -19,10 +19,10 @@ class Ejercicio2 : AppCompatActivity() {
         var validar = true
 
         val usuario = findViewById<TextInputEditText>(R.id.layoutUsuarioText)
-        var usuario2 = usuario.text ?: ""
+        val usuario2 = usuario.text ?: ""
         val contrasena = findViewById<TextInputEditText>(R.id.layoutContrasenaText)
         val gmail = findViewById<TextInputEditText>(R.id.layoutEmailText)
-        var gmail2 = gmail.text ?: ""
+        val gmail2 = gmail.text ?: ""
 
 
         if(usuario2.isEmpty()){
@@ -33,9 +33,14 @@ class Ejercicio2 : AppCompatActivity() {
             validar=false
         }else if(contrasena.length()<6) {
             contrasena.error="Contraseña incorrecta."
+            contrasena.setBackgroundColor(getColor(R.color.rojoclaro))
+            contrasena.setTextColor(getColor(R.color.white))
             validar=false
         }else if(!gmail2.contains("@") && !gmail2.contains(".")){
             gmail.error="Correo electronico no valido."
+            gmail.setBackgroundColor(getColor(R.color.rojoclaro))
+            gmail.setTextColor(getColor(R.color.white))
+            gmail.setText("GAY69ChupaPitos@gmail.com")
             validar=false
         }
         return validar
