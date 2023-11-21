@@ -15,8 +15,7 @@ class Ejercicio2 : AppCompatActivity() {
         setContentView(R.layout.activity_ejercicio2)
     }
 
-    fun boton(view: View):Boolean {
-        var validar = true
+    fun boton(view: View) {
 
         val usuario = findViewById<TextInputEditText>(R.id.layoutUsuarioText)
         val usuario2 = usuario.text ?: ""
@@ -25,24 +24,20 @@ class Ejercicio2 : AppCompatActivity() {
         val gmail2 = gmail.text ?: ""
 
 
-        if(usuario2.isEmpty()){
-            usuario.error="Error al introducir usuario"
+        if (usuario2.isEmpty()) {
+            usuario.error = "Error al introducir usuario"
             usuario.setBackgroundColor(getColor(R.color.rojoclaro))
             usuario.setTextColor(getColor(R.color.white))
             usuario.setText("GAY69")
-            validar=false
-        }else if(contrasena.length()<6) {
-            contrasena.error="Contraseña incorrecta."
+        } else if (contrasena.length() < 6) {
+            contrasena.error = "Contraseña incorrecta."
             contrasena.setBackgroundColor(getColor(R.color.rojoclaro))
             contrasena.setTextColor(getColor(R.color.white))
-            validar=false
-        }else if(!gmail2.contains("@") && !gmail2.contains(".")){
-            gmail.error="Correo electronico no valido."
+        } else if (!gmail2.contains("@") && !gmail2.contains(".")) {
+            gmail.error = "Correo electronico no valido."
             gmail.setBackgroundColor(getColor(R.color.rojoclaro))
             gmail.setTextColor(getColor(R.color.white))
             gmail.setText("GAY69ChupaPitos@gmail.com")
-            validar=false
         }
-        return validar
     }
 }
