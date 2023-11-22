@@ -8,7 +8,9 @@ import android.widget.CalendarView
 import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
 import com.google.android.material.textfield.TextInputEditText
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
 
 class Ejercicio3 : AppCompatActivity() {
     lateinit var correo: TextInputEditText
@@ -16,6 +18,7 @@ class Ejercicio3 : AppCompatActivity() {
     lateinit var nombre: TextInputEditText
     lateinit var cp: TextInputEditText
     lateinit var fecha_nacimiento:TextInputEditText
+    lateinit var texto:TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ejercicio3)
@@ -25,12 +28,14 @@ class Ejercicio3 : AppCompatActivity() {
         nombre = findViewById(R.id.nombre)
         cp= findViewById(R.id.cp)
         fecha_nacimiento= findViewById(R.id.fecha_nacimiento)
+        texto=findViewById<TextView>(R.id.textviewFinal)
+
+
+
 
         correo.addTextChangedListener {
             if (it.isNullOrBlank() || !it.contains("@") || !it.contains(".")) {
                 correo.error = "Correo no completado con exito"
-            } else {
-                contrasena.isFocusable = true
             }
         }
 
@@ -44,7 +49,6 @@ class Ejercicio3 : AppCompatActivity() {
 
                     if (it.matches(regex)) {
                         println("entra")
-                        nombre.isFocusable = true
 
                     } else {
                         contrasena.error =
@@ -59,30 +63,55 @@ class Ejercicio3 : AppCompatActivity() {
             nombre.addTextChangedListener{
                 if(it.isNullOrBlank()){
                     nombre.error="Esque no tienes nombre? Gilipollas"
-                    cp.isFocusable=false
-                    Log.v("focusable",cp.focusable.toString())
 
-                }else{
-                    cp.isFocusable=true
-                    Log.v("focusable",cp.focusable.toString())
                 }
             }
 
             cp.addTextChangedListener {
                 if (it.toString().length < 5 && it.toString().length>0) {
                     cp.error = "El CP es incorrecto"
-                } else {
-                    fecha_nacimiento.isFocusable = true
                 }
             }
 
-            fecha_nacimiento.addTextChangedListener{
-                var ano_actual = Calendar.YEAR
+         fun isAdult(dateOfBirth: String): Boolean {
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            val currentDate = Calendar.getInstance().time
 
+            try {
+                val birthDate = dateFormat.parse(dateOfBirth)
+                val calendarBirth = Calendar.getInstance().apply {
+                    time = birthDate
+                }
+
+               val age = Calendar.getInstance().get(Calendar.YEAR) - calendarBirth.get(Calendar.YEAR)
+
+                 calendarBirth.set(Calendar.YEAR, Calendar.getInstance().get(Calendar.YEAR))
+
+                return if (calendarBirth.time.before(currentDate)) {
+                     age >= 18
+                } else {
+                    age - 1 >= 18
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                return false
             }
+        }
 
-            fun botonE3(view: View) {
+// Dentro del bloque donde configuras el addTextChangedListener para fecha_nacimiento
+        fecha_nacimiento.addTextChangedListener {
+            if (!isAdult(it.toString())) {
+                fecha_nacimiento.error="Debes ser mayor de edad"
+            }else{
 
             }
         }
+
+
+        }
+
+    fun botonE3(view: View) {
+
+
     }
+}
