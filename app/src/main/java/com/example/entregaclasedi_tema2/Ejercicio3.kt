@@ -28,7 +28,7 @@ class Ejercicio3 : AppCompatActivity() {
         nombre = findViewById(R.id.nombre)
         cp= findViewById(R.id.cp)
         fecha_nacimiento= findViewById(R.id.fecha_nacimiento)
-        texto=findViewById<TextView>(R.id.textviewFinal)
+//        texto=findViewById<TextView>(R.id.textviewFinal)
 
 
 
@@ -98,7 +98,6 @@ class Ejercicio3 : AppCompatActivity() {
             }
         }
 
-// Dentro del bloque donde configuras el addTextChangedListener para fecha_nacimiento
         fecha_nacimiento.addTextChangedListener {
             if (!isAdult(it.toString())) {
                 fecha_nacimiento.error="Debes ser mayor de edad"
@@ -106,8 +105,6 @@ class Ejercicio3 : AppCompatActivity() {
 
             }
         }
-
-
         }
 
     fun botonE3(view: View) {
