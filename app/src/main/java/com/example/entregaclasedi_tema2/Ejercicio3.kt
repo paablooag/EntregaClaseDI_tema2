@@ -101,14 +101,12 @@ class Ejercicio3 : AppCompatActivity() {
         fecha_nacimiento.addTextChangedListener {
             if (!isAdult(it.toString())) {
                 fecha_nacimiento.error="Debes ser mayor de edad"
-            }else{
-
             }
         }
         }
 
     fun botonE3(view: View) {
-
+        recreate()
 
     }
 }

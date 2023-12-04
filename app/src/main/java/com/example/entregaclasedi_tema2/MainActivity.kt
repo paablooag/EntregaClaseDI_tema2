@@ -11,7 +11,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
-
     fun boton(view: View) {
         val intent = Intent(this, Ejercicio2::class.java)
         startActivity(intent)
